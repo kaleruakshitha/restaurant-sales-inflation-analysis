@@ -42,7 +42,23 @@ No regression, forecasting, qualitative coding, or causal identification is clai
 | Results from original snapshot | [docs/reported-results.md](docs/reported-results.md) |
 | Validation and reproduction notes | [docs/verification.md](docs/verification.md) |
 | Saved project output | [outputs/latest_month_summary.csv](outputs/latest_month_summary.csv) |
-| Visualization and full report | Available in the original project ZIP; publication of PNG/PDF assets pending |
+| Visual results | [Three charts](#visual-results) (SVG versions recreated from verified saved values) |
+
+## Visual results
+
+The charts below were recreated from the verified saved output values. The first two compare **selected months**, rather than presenting all 199 monthly observations. The three full-resolution original PNG plots are preserved in the local project ZIP.
+
+### Inflation-adjusted restaurant sales — selected months
+
+![Adjusted restaurant sales in January 2019 dollars](outputs/figures/figure_1_real_sales.svg)
+
+### Reported versus adjusted sales — selected months
+
+![Reported versus inflation-adjusted sales indices](outputs/figures/figure_2_sales_index.svg)
+
+### July 2026 year-over-year growth
+
+![Nominal growth, CPI change and inflation-adjusted growth](outputs/figures/figure_3_july_growth.svg)
 
 ## Technical skills
 
@@ -63,7 +79,7 @@ From the repository root in RStudio:
 source("scripts/analyze_restaurant_sales.R")
 ```
 
-The repository intentionally excludes the raw CSVs from Git tracking for now; they are retained in the original ZIP package. Current FRED downloads may be revised and may not reproduce this exact snapshot.
+The repository currently excludes the raw CSVs from Git tracking; they are retained in the original ZIP package. Because these are public aggregate monthly economic statistics, publishing the two small saved CSV snapshots would also be appropriate if desired. Current FRED downloads may be revised and may not reproduce this exact snapshot.
 
 **Verification:** Both source CSV SHA-256 hashes matched the original validation record. An independent Python recalculation reproduced the 199-row processed monthly data to numerical floating-point precision and matched the original July 2026 summary. The original R script has **not** been rerun in an R environment here.
 
