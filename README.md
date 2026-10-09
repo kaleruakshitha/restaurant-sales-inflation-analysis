@@ -1,61 +1,74 @@
 # Restaurant Sales Growth and Inflation (2010–2026)
 
-**Independent business analytics project | Akshitha Kaleru | October 2026**
+**Independent business analytics project · Akshitha Kaleru · R / RStudio**
 
 ## Business question
-Are U.S. food services and drinking places growing after accounting for rising food-away-from-home prices?
 
-## Findings from the September 29, 2026 data snapshot
+Are U.S. food services and drinking places growing after accounting for higher food-away-from-home prices?
 
-| Metric | July 2026 finding |
+## Main results
+
+Using the **September 29, 2026 saved data snapshot**, the project found:
+
+| Metric | July 2026 |
 | --- | ---: |
-| Reported monthly sales | $103.824 billion |
-| Sales in January 2019 dollars | $73.351 billion |
-| Reported year-over-year growth | 5.201% |
-| Food-away-from-home CPI year-over-year change | 3.400% |
-| Inflation-adjusted year-over-year growth | 1.741% |
-| Reported growth since January 2019 | 72.48% |
-| Adjusted growth since January 2019 | 21.86% |
+| Reported monthly sales | **$103.824 billion** |
+| Inflation-adjusted monthly sales (January 2019 prices) | **$73.351 billion** |
+| Reported year-over-year growth | **5.20%** |
+| Food-away-from-home CPI change | **3.40%** |
+| Inflation-adjusted growth | **1.74%** |
+| Reported growth since January 2019 | **72.48%** |
+| Adjusted growth since January 2019 | **21.86%** |
 
-**Takeaway:** Revenue growth remained positive after the approximate CPI adjustment, but was considerably smaller than nominal growth. This is not a measure of meals, customer traffic, profits, or causal inflation effects.
+**Finding:** Sales growth remained positive after the price adjustment, but was substantially lower than the growth in reported dollars. Adjusted revenue is **not** the same as customer visits, meal quantities, same-store growth or profitability.
 
-## Data sources
-- US Census food services/drinking places sales: [FRED MRTSSM722USS](https://fred.stlouisfed.org/series/MRTSSM722USS), millions USD, seasonally adjusted
-- BLS food-away-from-home CPI: [FRED CUSR0000SEFV](https://fred.stlouisfed.org/series/CUSR0000SEFV), 1982–84=100, seasonally adjusted
+## Methods and data
 
-The project report used saved September 29, 2026 CSV files containing **199 sales observations** (January 2010–July 2026), and 200 CPI observations through August 2026. October 2025 CPI is unavailable in the preserved snapshot and is intentionally **not interpolated**. There are 198 valid paired months. Current FRED downloads may contain revisions or differ from the saved snapshot.
+- U.S. Census **MRTSSM722USS** monthly food services/drinking places sales (millions USD)
+- BLS **CUSR0000SEFV** food-away-from-home CPI (1982–84=100)
+- Both series accessed through [FRED](https://fred.stlouisfed.org)
+- 199 monthly sales observations (January 2010–July 2026); 200 CPI observations (through August 2026)
+- Left join by month; one missing CPI value in October 2025 is **preserved**, not interpolated
+- Inflation adjustment: `real_sales = reported_sales × CPI_Jan2019 / CPI_month`
+- Year-over-year growth matches the exact calendar month one year earlier
 
-## Methods
-1. Parse CSV dates and check for duplicate month keys.
-2. Keep all sales months using a **left join** on observation date.
-3. Set January 2019 CPI (=280.380 in saved snapshot) as the base period.
-4. Compute `real_sales = nominal_sales × base_CPI / current_CPI`.
-5. Express nominal and adjusted sales as indices relative to January 2019 (=100).
-6. Compute year-over-year growth by matching exactly the same calendar month in the previous year (not by shifting after dropping missing values).
-7. Check the growth ratio identity and preserve missing results.
+No regression, forecasting, qualitative coding, or causal identification is claimed.
 
-No regression or forecasting model was fitted. CPI and sales coverage are not identical; deflation is an **approximation**.
+## Reviewer navigation
 
-## Reproducing the calculations
+| Area | File |
+| --- | --- |
+| Original R analysis script | [scripts/analyze_restaurant_sales.R](scripts/analyze_restaurant_sales.R) |
+| Results from original snapshot | [docs/reported-results.md](docs/reported-results.md) |
+| Validation and reproduction notes | [docs/verification.md](docs/verification.md) |
+| Saved project output | [outputs/latest_month_summary.csv](outputs/latest_month_summary.csv) |
+| Visualization and full report | Available in the original project ZIP; publication of PNG/PDF assets pending |
 
-1. Download both CSV series from FRED. To reproduce the original report exactly, use the **September 29, 2026 snapshots**, including the October 2025 missing CPI observation. Otherwise results may reflect revised data.
-2. Save them to `data/raw/MRTSSM722USS.csv` and `data/raw/CUSR0000SEFV.csv`.
-3. From the project root, run:
+## Technical skills
 
-```bash
-Rscript scripts/analyze_restaurant_sales.R
+**R/RStudio:** reading and validating CSV files, date conversion, left joins, missing-data preservation, exact month matching, vectorized calculations, indexed comparisons, consistency checks, and chart exports.
+
+**Business analytics:** separating reported revenue from inflation-adjusted trends, communicating limitations and creating interpretable data products.
+
+## Reproducing the original results
+
+The original R script is restored from the project ZIP and requires the two September 29, 2026 FRED CSV snapshots placed at:
+
+- `data/raw/MRTSSM722USS.csv`
+- `data/raw/CUSR0000SEFV.csv`
+
+From the repository root in RStudio:
+
+```r
+source("scripts/analyze_restaurant_sales.R")
 ```
 
-The script uses **base R only**, checks data integrity, and writes CSV summary outputs and PNG charts to `outputs/`. It is a **reconstructed reference implementation** from the report, not a recovered copy of the original RStudio script. R execution using original source files has not been verified in this package.
+The repository intentionally excludes the raw CSVs from Git tracking for now; they are retained in the original ZIP package. Current FRED downloads may be revised and may not reproduce this exact snapshot.
 
-## Skills demonstrated
-**R and RStudio:** CSV ingestion, dates, validation, joins, vector calculations, time-series indexing, year-over-year comparisons, and visual communication. **Business interpretation:** separate price-level effects from reported revenue and avoid unsupported conclusions about demand or profit.
+**Verification:** Both source CSV SHA-256 hashes matched the original validation record. An independent Python recalculation reproduced the 199-row processed monthly data to numerical floating-point precision and matched the original July 2026 summary. The original R script has **not** been rerun in an R environment here.
 
-## Repository structure
-- `scripts/analyze_restaurant_sales.R`: reconstructed base R pipeline
-- `docs/reported-results.md`: documented analysis findings
-- `data/raw/`: input folder, excluded from publication
-- `outputs/`: locally generated tables/charts
+## Sources
 
-## Important limitation
-The exact original CSV snapshots, original R script, and figures from the completed report are not included. Reported results above came from the completed written analysis and should not be represented as newly reproduced until the original data snapshot is restored and run.
+- [FRED: MRTSSM722USS](https://fred.stlouisfed.org/series/MRTSSM722USS)
+- [FRED: CUSR0000SEFV](https://fred.stlouisfed.org/series/CUSR0000SEFV)
+- [BLS: constant dollars](https://www.bls.gov/cpi/factsheets/purchasing-power-constant-dollars.htm)
