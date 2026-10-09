@@ -43,27 +43,27 @@ No regression, forecasting, qualitative coding, or causal identification is clai
 | Validation and reproduction notes | [docs/verification.md](docs/verification.md) |
 | Original validation record | [outputs/validation_record.json](outputs/validation_record.json) |
 | Saved project output | [outputs/latest_month_summary.csv](outputs/latest_month_summary.csv) |
-| Visual results | [Three charts](#visual-results) (SVG versions recreated from verified saved values) |
+| Original charts | [Three full charts](#visual-results) |
+| Final research report | [Restaurant Sales and Inflation Report (PDF)](docs/Restaurant_Sales_and_Inflation_Report.pdf) |
+| Source CSVs | [Sales](data/raw/MRTSSM722USS.csv) · [CPI](data/raw/CUSR0000SEFV.csv) |
 
 ## Visual results
 
-The charts below were recreated from the verified saved output values. The first two compare **selected months**, rather than presenting all 199 monthly observations. The original full time-series PNG plots are preserved in the supplied project ZIP. These SVG illustrations use verified **selected-month** values; they are not substitutes for the full-resolution time-series plots.
+These are the **original charts from the saved project output**, covering the full study period where applicable. The October 2025 CPI value remains missing rather than interpolated.
 
-### Inflation-adjusted restaurant sales — selected months
+### Inflation-adjusted restaurant sales
 
-![Adjusted restaurant sales in January 2019 dollars](outputs/figures/figure_1_real_sales.svg)
+![Original inflation-adjusted sales chart](outputs/figures/figure_1_real_sales.png)
 
-### Reported versus adjusted sales — selected months
+### Reported versus inflation-adjusted sales
 
-![Reported versus inflation-adjusted sales indices](outputs/figures/figure_2_sales_index.svg)
+![Original reported versus inflation-adjusted sales chart](outputs/figures/figure_2_sales_index.png)
 
-### July 2026 year-over-year growth
+### July 2026 year-over-year growth comparison
 
-![Nominal growth, CPI change and inflation-adjusted growth](outputs/figures/figure_3_july_growth.svg)
+![Original July 2026 growth comparison](outputs/figures/figure_3_july_growth.png)
 
-## Source and publication notes
-
-The original ZIP contains the two monthly FRED CSV snapshots, full-length PNG charts, and final PDF/DOCX report. These original binary assets have **not yet been published in this GitHub repository**; the current figures are clearly labelled selected-month recreations. Do not interpret them as full 2010–2026 plots. The original validation record is provided under `outputs/validation_record.json`.
+For the full methods, interpretation, and limitations, see the [final PDF report](docs/Restaurant_Sales_and_Inflation_Report.pdf).
 
 ## Technical skills
 
@@ -84,7 +84,7 @@ From the repository root in RStudio:
 source("scripts/analyze_restaurant_sales.R")
 ```
 
-The repository currently excludes the raw CSVs from Git tracking; they are retained in the original ZIP package. Because these are public aggregate monthly economic statistics, publishing the two small saved CSV snapshots would also be appropriate if desired. Current FRED downloads may be revised and may not reproduce this exact snapshot.
+Both saved public, aggregate FRED CSV snapshots are now provided in `data/raw/`, allowing the original snapshot to be reproduced without downloading potentially revised live series. Current FRED downloads may be revised and may not reproduce this exact snapshot.
 
 **Verification:** Both source CSV SHA-256 hashes matched the original validation record. An independent Python recalculation reproduced the 199-row processed monthly data to numerical floating-point precision and matched the original July 2026 summary. The original R script has **not** been rerun in an R environment here.
 
