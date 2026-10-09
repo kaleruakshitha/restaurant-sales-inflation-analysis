@@ -41,12 +41,13 @@ No regression, forecasting, qualitative coding, or causal identification is clai
 | Original R analysis script | [scripts/analyze_restaurant_sales.R](scripts/analyze_restaurant_sales.R) |
 | Results from original snapshot | [docs/reported-results.md](docs/reported-results.md) |
 | Validation and reproduction notes | [docs/verification.md](docs/verification.md) |
+| Original validation record | [outputs/validation_record.json](outputs/validation_record.json) |
 | Saved project output | [outputs/latest_month_summary.csv](outputs/latest_month_summary.csv) |
 | Visual results | [Three charts](#visual-results) (SVG versions recreated from verified saved values) |
 
 ## Visual results
 
-The charts below were recreated from the verified saved output values. The first two compare **selected months**, rather than presenting all 199 monthly observations. The three full-resolution original PNG plots are preserved in the local project ZIP.
+The charts below were recreated from the verified saved output values. The first two compare **selected months**, rather than presenting all 199 monthly observations. The original full time-series PNG plots are preserved in the supplied project ZIP. These SVG illustrations use verified **selected-month** values; they are not substitutes for the full-resolution time-series plots.
 
 ### Inflation-adjusted restaurant sales — selected months
 
@@ -60,6 +61,10 @@ The charts below were recreated from the verified saved output values. The first
 
 ![Nominal growth, CPI change and inflation-adjusted growth](outputs/figures/figure_3_july_growth.svg)
 
+## Source and publication notes
+
+The original ZIP contains the two monthly FRED CSV snapshots, full-length PNG charts, and final PDF/DOCX report. These original binary assets have **not yet been published in this GitHub repository**; the current figures are clearly labelled selected-month recreations. Do not interpret them as full 2010–2026 plots. The original validation record is provided under `outputs/validation_record.json`.
+
 ## Technical skills
 
 **R/RStudio:** reading and validating CSV files, date conversion, left joins, missing-data preservation, exact month matching, vectorized calculations, indexed comparisons, consistency checks, and chart exports.
@@ -68,7 +73,7 @@ The charts below were recreated from the verified saved output values. The first
 
 ## Reproducing the original results
 
-The original R script is restored from the project ZIP and requires the two September 29, 2026 FRED CSV snapshots placed at:
+The original project's R analysis script was restored to `scripts/` from the supplied ZIP. To reproduce the saved September 29, 2026 snapshot, it requires the two CSV files placed at:
 
 - `data/raw/MRTSSM722USS.csv`
 - `data/raw/CUSR0000SEFV.csv`
