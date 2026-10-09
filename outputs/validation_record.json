@@ -1,0 +1,25 @@
+{
+  "validation_runtime": "Python; R execution unavailable in report-building environment",
+  "raw_sales_rows": 199,
+  "raw_cpi_rows": 200,
+  "joined_rows": 199,
+  "valid_price_sales_pairs": 198,
+  "missing_price_month": "2025-10-01",
+  "base_month": "2019-01-01",
+  "base_cpi": 280.38,
+  "base_sales_millions": 60194.0,
+  "checks_passed": [
+    "unique month keys",
+    "left join preserves sales rows",
+    "reference month equals reported sales",
+    "inverse deflation recovers reported sales",
+    "exact calendar year matching",
+    "growth ratio identity",
+    "missing CPI remains missing adjusted sales",
+    "July 2026 agrees with supplied R console values"
+  ],
+  "raw_sha256": {
+    "MRTSSM722USS.csv": "7d14e9d8112e49bccad0ff241b5baee9b5c6695fc106fe617e7ceef7a89b22f1",
+    "CUSR0000SEFV.csv": "0306d96144fcc110660c545779de68b2d9109f7f9fbea7ed43da43235210ab94"
+  }
+}
