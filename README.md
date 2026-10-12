@@ -34,7 +34,7 @@ Using the **September 29, 2026 saved data snapshot**, the project found:
 
 No regression, forecasting, qualitative coding, or causal identification is claimed.
 
-## Reviewer navigation
+## Explore the Project
 
 | Area | File |
 | --- | --- |
