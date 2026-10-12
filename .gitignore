@@ -1,8 +1,17 @@
-data/raw/*
-!data/raw/.gitkeep
-outputs/*
-!outputs/.gitkeep
+# R temporary state and local system files
 .Rhistory
 .RData
 .Rproj.user/
 .DS_Store
+
+# Generated scratch files (preserve the published source CSVs and figures)
+data/processed/
+data/interim/
+outputs/*_R.png
+outputs/missing_price_months.csv
+
+# Python caches, if used for independent validation
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
