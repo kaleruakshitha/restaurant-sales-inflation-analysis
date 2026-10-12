@@ -15,6 +15,6 @@ The saved September 29, 2026 project ZIP includes two original FRED CSV inputs, 
 
 ## Important distinction
 
-The original R script was restored from the source ZIP and reviewed, but was **not rerun** with R here because Rscript was unavailable. The Python calculations agree with the saved output. The repository now includes the original PNG report figures in `outputs/figures/` and both input snapshots in `data/raw/`, along with the final PDF report under `docs/`.
+The original R script was restored from the source ZIP and reviewed. An independent Python recalculation reproduced the saved monthly results, including the July 2026 growth figures. A fresh execution of the complete R script has not yet been performed in this review environment. The repository now includes the original PNG report figures in `outputs/figures/` and both input snapshots in `data/raw/`, along with the final PDF report under `docs/`.
 
 This is a descriptive time-series comparison and not a forecast, causal inflation study or analysis of profits or visits.
